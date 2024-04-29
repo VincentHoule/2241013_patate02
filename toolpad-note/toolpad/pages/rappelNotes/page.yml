@@ -1,0 +1,722 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  alias:
+    - swkHUvh
+  title: Default page
+  content:
+    - component: PageRow
+      name: pageRow
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn
+          layout:
+            columnSize: 1.1699163495332086
+          children:
+            - component: DataGrid
+              name: dataGridTache
+              layout:
+                columnSize: 1
+                height: 340
+              props:
+                rows:
+                  $$jsExpression:
+                    "affiche.checked === undefined ? listeTache.data.Taches :
+                    listeTacheComplete.data.Taches"
+                rowsSource: prop
+                columns:
+                  - field: id
+                    type: number
+                  - field: utilisateur_id
+                    type: number
+                  - field: titre
+                    type: string
+                    width: 148
+                  - field: description
+                    type: string
+                  - field: date_debut
+                    type: dateTime
+                  - field: date_echeance
+                    type: dateTime
+                  - field: complete
+                    type: boolean
+                density: compact
+                loading:
+                  $$jsExpression:
+                    listeTache.isFetching || listeTache.isLoading ||
+                    listeTacheComplete.isFetching ||
+                    listeTacheComplete.isLoading
+            - component: PageRow
+              name: pageRow1
+              props:
+                justifyContent: start
+              children:
+                - component: Checkbox
+                  name: affiche
+                  props:
+                    mode: switch
+                    label: Afficher tâches terminée
+                - component: Button
+                  name: button
+                  props:
+                    content: Supprimer Tache
+                    size: medium
+                    onClick:
+                      $$jsExpressionAction: supprimerTache.call()
+                    disabled:
+                      $$jsExpression: dataGridTache.selection === undefined
+                - component: Button
+                  name: button2
+                  props:
+                    content: Changer le statut
+                    size: medium
+                    onClick:
+                      $$jsExpressionAction:
+                        completeTache.call(); listeTache.refetch();
+                        listeTacheComplete.refetch();
+                    disabled:
+                      $$jsExpression: dataGridTache.selection === undefined
+        - component: PageColumn
+          name: pageColumn1
+          layout:
+            columnSize: 0.8300836504667914
+          children:
+            - component: DataGrid
+              name: dataGridSousTache
+              layout:
+                columnSize: 1
+                height: 336
+              props:
+                rows:
+                  $$jsExpression:
+                    "listeSousTache.data ? listeSousTache.data.SousTaches :
+                    undefined"
+                columns:
+                  - field: id
+                    type: number
+                  - field: tache_id
+                    type: number
+                  - field: titre
+                    type: string
+                  - field: complete
+                    type: boolean
+                loading:
+                  $$jsExpression: listeSousTache.isFetching || listeSousTache.isLoading
+            - component: PageRow
+              name: pageRow2
+              props:
+                justifyContent: start
+              children:
+                - component: Button
+                  name: button1
+                  props:
+                    content: Supprimer SousTache
+                    fullWidth: false
+                    color: secondary
+                    disabled:
+                      $$jsExpression: dataGridSousTache.selection === undefined
+                    onClick:
+                      $$jsExpressionAction: supprimerSousTache.call()
+                - component: Button
+                  name: button3
+                  props:
+                    content: Changer le statut
+                    color: secondary
+                    disabled:
+                      $$jsExpression: dataGridSousTache.selection === undefined
+                    onClick:
+                      $$jsExpressionAction: completeSousTache.call(); listeSousTache.refetch()
+    - component: PageRow
+      name: pageRow3
+      props:
+        justifyContent: start
+      children:
+        - component: PageColumn
+          name: pageColumn2
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: text
+              layout:
+                columnSize: 1
+              props:
+                value: Modifier une tâche
+            - component: Form
+              name: form
+              props:
+                submitButtonText: Modifier
+                onSubmit:
+                  $$jsExpressionAction:
+                    modifierTache.call(); listeTache.refetch();
+                    listeTacheComplete.refetch();
+              children:
+                - component: PageRow
+                  name: pageRow4
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text4
+                      layout:
+                        columnSize: 0.6546961050003597
+                      props:
+                        value: titre
+                    - component: TextField
+                      name: titreTacheM
+                      layout:
+                        columnSize: 1.3453038949996403
+                      props:
+                        fullWidth: true
+                        isRequired: true
+                        defaultValue:
+                          $$jsExpression: dataGridTache.selection.titre
+                - component: PageRow
+                  name: pageRow5
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text5
+                      layout:
+                        columnSize: 0.6546961050003597
+                      props:
+                        value: description
+                    - component: TextField
+                      name: descriptionTacheM
+                      layout:
+                        columnSize: 1.3453038949996403
+                      props:
+                        fullWidth: true
+                        isRequired: true
+                        defaultValue:
+                          $$jsExpression: dataGridTache.selection.description
+                - component: PageRow
+                  name: pageRow6
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text6
+                      layout:
+                        columnSize: 0.6546961050003597
+                      props:
+                        value: date de début
+                    - component: TextField
+                      name: dateDebutTacheM
+                      layout:
+                        columnSize: 1.3453038949996403
+                      props:
+                        fullWidth: true
+                        isRequired: true
+                        defaultValue:
+                          $$jsExpression: dataGridTache.selection.date_debut
+                - component: PageRow
+                  name: pageRow7
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text34
+                      layout:
+                        columnSize: 0.6546960624705778
+                      props:
+                        value: date d'échéance
+                    - component: TextField
+                      name: dateEcheanceTacheM
+                      layout:
+                        columnSize: 1.3453039375294222
+                      props:
+                        fullWidth: true
+                        isRequired: true
+                        defaultValue:
+                          $$jsExpression: dataGridTache.selection.date_echeance
+                - component: PageRow
+                  name: pageRow16
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text15
+                      props:
+                        value: Statut
+                    - component: Select
+                      name: completeTacheM
+                      layout:
+                        horizontalAlign: end
+                      props:
+                        options:
+                          - "true"
+                          - "false"
+                        fullWidth: false
+                        defaultValue:
+                          $$jsExpression: dataGridTache.selection.complete
+                        size: small
+            - component: Text
+              name: text2
+              props:
+                value: Ajouter une tâche
+            - component: Form
+              name: form2
+              children:
+                - component: PageRow
+                  name: pageRow12
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text11
+                      props:
+                        value: titre
+                      layout:
+                        columnSize: 0.6546961050003597
+                    - component: TextField
+                      name: titreTacheA
+                      layout:
+                        columnSize: 1.3453038949996403
+                      props:
+                        fullWidth: true
+                - component: PageRow
+                  name: pageRow13
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text12
+                      props:
+                        value: description
+                      layout:
+                        columnSize: 0.6546961050003597
+                    - component: TextField
+                      name: descriptionTacheA
+                      layout:
+                        columnSize: 1.3453038949996403
+                      props:
+                        fullWidth: true
+                - component: PageRow
+                  name: pageRow14
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text13
+                      props:
+                        value: date de début
+                      layout:
+                        columnSize: 0.6546961050003597
+                    - component: TextField
+                      name: dateDebutTacheA
+                      layout:
+                        columnSize: 1.3453038949996403
+                      props:
+                        fullWidth: true
+                - component: PageRow
+                  name: pageRow15
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text14
+                      props:
+                        value: date d'échéance
+                      layout:
+                        columnSize: 0.6546961050003597
+                    - component: TextField
+                      name: dateEcheanceA
+                      props:
+                        fullWidth: true
+                      layout:
+                        columnSize: 1.3453038949996403
+                - component: PageRow
+                  name: pageRow19
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text18
+                      props:
+                        value: Statut
+                    - component: Select
+                      name: completeTacheA
+                      layout:
+                        horizontalAlign: end
+                      props:
+                        options:
+                          - "true"
+                          - "false"
+                        fullWidth: false
+                        defaultValue:
+                          $$jsExpression: "false"
+        - component: PageColumn
+          name: pageColumn3
+          layout:
+            columnSize: 1
+          children:
+            - component: Text
+              name: text1
+              layout:
+                columnSize: 1
+              props:
+                value: Modifier une sous-tâche
+            - component: Form
+              name: form1
+              props:
+                submitButtonText: Modifier
+                onSubmit:
+                  $$jsExpressionAction: modifierSousTache.call(); listeSousTache.refetch()
+              children:
+                - component: PageRow
+                  name: pageRow8
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text8
+                      props:
+                        value: titre
+                      layout:
+                        columnSize: 0.6560773625631022
+                    - component: TextField
+                      name: titreSousM
+                      layout:
+                        columnSize: 1.3439226374368978
+                      props:
+                        fullWidth: true
+                        isRequired: true
+                        defaultValue:
+                          $$jsExpression: dataGridSousTache.selection.titre
+                - component: PageRow
+                  name: pageRow9
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text9
+                      props:
+                        value: tâche id
+                      layout:
+                        columnSize: 0.6560773625631022
+                    - component: TextField
+                      name: tacheIdSousM
+                      layout:
+                        columnSize: 1.3439226374368978
+                      props:
+                        fullWidth: true
+                        isRequired: true
+                        placeholder: ""
+                        name: ""
+                        defaultValue:
+                          $$jsExpression: dataGridSousTache.selection.tache_id
+                - component: PageRow
+                  name: pageRow17
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text16
+                      props:
+                        value: Statut
+                    - component: Select
+                      name: completeSousM
+                      layout:
+                        horizontalAlign: end
+                      props:
+                        options:
+                          - "true"
+                          - "false"
+                        defaultValue:
+                          $$jsExpression: dataGridSousTache.selection.complete
+            - component: Text
+              name: text3
+              props:
+                value: Ajouter une sous-tâche
+            - component: Form
+              name: form3
+              children:
+                - component: PageRow
+                  name: pageRow10
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text7
+                      props:
+                        value: titre
+                      layout:
+                        columnSize: 0.6560773625631022
+                    - component: TextField
+                      name: titreSousA
+                      props:
+                        fullWidth: true
+                      layout:
+                        columnSize: 1.3439226374368978
+                - component: PageRow
+                  name: pageRow11
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text10
+                      layout:
+                        columnSize: 0.6560773200769865
+                      props:
+                        value: tâche id
+                    - component: TextField
+                      name: tacheIdSousA
+                      layout:
+                        columnSize: 1.3439226799230135
+                      props:
+                        fullWidth: true
+                        defaultValue:
+                          $$jsExpression: dataGridTache.selection.id
+                - component: PageRow
+                  name: pageRow18
+                  props:
+                    justifyContent: start
+                  children:
+                    - component: Text
+                      name: text17
+                      props:
+                        value: Statut
+                    - component: Select
+                      name: completeSousA
+                      layout:
+                        horizontalAlign: end
+                      props:
+                        options:
+                          - "true"
+                          - "false"
+                        defaultValue:
+                          $$jsExpression: "false"
+              props:
+                hasResetButton: false
+  queries:
+    - name: listeTache
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/tachesMemoire/taches/liste/${parameter\
+            s.id}`"
+        headers: [{ name: Authorization, value: { $$env: API_KEY } }]
+        method: GET
+        searchParams: []
+      parameters:
+        - name: id
+          value: "1"
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+    - name: listeSousTache
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/taches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+        searchParams: []
+      parameters:
+        - name: id
+          value:
+            $$jsExpression: dataGridTache.selection.id
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+    - name: completeTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/taches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: PATCH
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: id
+          value:
+            $$jsExpression: dataGridTache.selection.id
+    - name: completeSousTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/sousTaches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: PATCH
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: id
+          value:
+            $$jsExpression: dataGridSousTache.selection.id
+    - name: supprimerTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/taches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: POST
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: id
+          value:
+            $$jsExpression: dataGridTache.selection.id
+    - name: supprimerSousTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/sousTaches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: DELETE
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: id
+          value:
+            $$jsExpression: dataGridSousTache.selection.id
+    - name: listeTacheComplete
+      mode: query
+      query:
+        kind: rest
+        url:
+          $$jsExpression:
+            "`${parameters.API_HOST}/tachesMemoire/taches/listeComplete/${p\
+            arameters.id}`"
+        searchParams: []
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        method: GET
+      parameters:
+        - name: id
+          value: "1"
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+    - name: modifierTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/taches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: urlEncoded
+          content:
+            - name: titre
+              value:
+                $$jsExpression: parameters.titre
+            - name: description
+              value:
+                $$jsExpression: parameters.description
+            - name: date_debut
+              value:
+                $$jsExpression: parameters.date_debut
+            - name: date_echeance
+              value:
+                $$jsExpression: parameters.date_echeance
+            - name: complete
+              value:
+                $$jsExpression: parameters.complete
+        method: PUT
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: id
+          value:
+            $$jsExpression: dataGridTache.selection.id
+        - name: titre
+          value:
+            $$jsExpression: titreTacheM.value
+        - name: description
+          value:
+            $$jsExpression: descriptionTacheM.value
+        - name: date_debut
+          value:
+            $$jsExpression: dateDebutTacheM.value
+        - name: date_echeance
+          value:
+            $$jsExpression: dateEcheanceTacheM.value
+        - name: complete
+          value:
+            $$jsExpression: completeTacheM.value
+    - name: modifierSousTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/sousTaches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+        body:
+          kind: urlEncoded
+          content:
+            - name: titre
+              value:
+                $$jsExpression: parameters.titre
+            - name: tache_id
+              value:
+                $$jsExpression: parameters.description
+            - name: complete
+              value:
+                $$jsExpression: parameters.complete
+        method: PUT
+        searchParams: []
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: id
+          value:
+            $$jsExpression: dataGridSousTache.selection.id
+        - name: titre
+          value:
+            $$jsExpression: titreSousM.value
+        - name: tache_id
+          value:
+            $$jsExpression: tacheIdSousM.value
+        - name: complete
+          value:
+            $$jsExpression: completeSousM.value
+  display: shell
