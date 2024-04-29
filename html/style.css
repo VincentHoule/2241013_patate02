@@ -1,0 +1,68 @@
+html{
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10em;
+}
+#principale{
+    display: flex;
+    flex-direction: row;
+
+}
+#nvCle{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    border-radius: 30px;
+    box-shadow: 3mm 3mm 2mm 0mm rgb(20, 49, 104);
+    max-width: 800px;
+    max-height: 800px;
+    padding: 3em;
+    margin-right: 3em;
+}
+
+#nvUtilisateur{
+    display: flex;
+    flex-direction: column;
+    background-color: antiquewhite;
+    border-radius: 30px;
+    box-shadow: 3mm 3mm 2mm 0mm rgb(20, 49, 104);
+    max-width: 800px;
+    max-height: 800px;
+    padding: 3em;
+    margin-left: 3em;
+
+}
+
+.texte01{
+    color: cornflowerblue;
+    font-weight: bolder;
+    margin-top: 1em ;
+
+}
+
+.input{
+    padding: 5px 40px 5px 15px;
+    border: 1px solid cornflowerblue !important;
+    border-radius: 25px;
+    margin-top: 1em ;
+
+}
+
+.input:focus{
+    outline: cornflowerblue solid 3px;
+}
+
+#fbutton{
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 5px;
+    border: white;
+    font-size: 17px;
+    padding: 6px 18px;
+    margin-top: 1em ;
+
+}
