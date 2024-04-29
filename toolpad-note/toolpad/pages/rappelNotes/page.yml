@@ -66,7 +66,9 @@ spec:
                     content: Supprimer Tache
                     size: medium
                     onClick:
-                      $$jsExpressionAction: supprimerTache.call()
+                      $$jsExpressionAction:
+                        supprimerTache.call(); listeTache.refetch();
+                        listeTacheComplete.refetch()
                     disabled:
                       $$jsExpression: dataGridTache.selection === undefined
                 - component: Button
@@ -92,9 +94,7 @@ spec:
                 height: 336
               props:
                 rows:
-                  $$jsExpression:
-                    "listeSousTache.data ? listeSousTache.data.SousTaches :
-                    undefined"
+                  $$jsExpression: "listeSousTache.data ? listeSousTache.data.SousTaches : [0]"
                 columns:
                   - field: id
                     type: number
@@ -102,6 +102,7 @@ spec:
                     type: number
                   - field: titre
                     type: string
+                    width: 126
                   - field: complete
                     type: boolean
                 loading:
@@ -114,13 +115,13 @@ spec:
                 - component: Button
                   name: button1
                   props:
-                    content: Supprimer SousTache
+                    content: Supprimer Sous-Tache
                     fullWidth: false
                     color: secondary
                     disabled:
                       $$jsExpression: dataGridSousTache.selection === undefined
                     onClick:
-                      $$jsExpressionAction: supprimerSousTache.call()
+                      $$jsExpressionAction: supprimerSousTache.call(); listeSousTache.refetch()
                 - component: Button
                   name: button3
                   props:
@@ -256,101 +257,6 @@ spec:
                         defaultValue:
                           $$jsExpression: dataGridTache.selection.complete
                         size: small
-            - component: Text
-              name: text2
-              props:
-                value: Ajouter une tâche
-            - component: Form
-              name: form2
-              children:
-                - component: PageRow
-                  name: pageRow12
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text11
-                      props:
-                        value: titre
-                      layout:
-                        columnSize: 0.6546961050003597
-                    - component: TextField
-                      name: titreTacheA
-                      layout:
-                        columnSize: 1.3453038949996403
-                      props:
-                        fullWidth: true
-                - component: PageRow
-                  name: pageRow13
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text12
-                      props:
-                        value: description
-                      layout:
-                        columnSize: 0.6546961050003597
-                    - component: TextField
-                      name: descriptionTacheA
-                      layout:
-                        columnSize: 1.3453038949996403
-                      props:
-                        fullWidth: true
-                - component: PageRow
-                  name: pageRow14
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text13
-                      props:
-                        value: date de début
-                      layout:
-                        columnSize: 0.6546961050003597
-                    - component: TextField
-                      name: dateDebutTacheA
-                      layout:
-                        columnSize: 1.3453038949996403
-                      props:
-                        fullWidth: true
-                - component: PageRow
-                  name: pageRow15
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text14
-                      props:
-                        value: date d'échéance
-                      layout:
-                        columnSize: 0.6546961050003597
-                    - component: TextField
-                      name: dateEcheanceA
-                      props:
-                        fullWidth: true
-                      layout:
-                        columnSize: 1.3453038949996403
-                - component: PageRow
-                  name: pageRow19
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text18
-                      props:
-                        value: Statut
-                    - component: Select
-                      name: completeTacheA
-                      layout:
-                        horizontalAlign: end
-                      props:
-                        options:
-                          - "true"
-                          - "false"
-                        fullWidth: false
-                        defaultValue:
-                          $$jsExpression: "false"
         - component: PageColumn
           name: pageColumn3
           layout:
@@ -430,70 +336,6 @@ spec:
                           - "false"
                         defaultValue:
                           $$jsExpression: dataGridSousTache.selection.complete
-            - component: Text
-              name: text3
-              props:
-                value: Ajouter une sous-tâche
-            - component: Form
-              name: form3
-              children:
-                - component: PageRow
-                  name: pageRow10
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text7
-                      props:
-                        value: titre
-                      layout:
-                        columnSize: 0.6560773625631022
-                    - component: TextField
-                      name: titreSousA
-                      props:
-                        fullWidth: true
-                      layout:
-                        columnSize: 1.3439226374368978
-                - component: PageRow
-                  name: pageRow11
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text10
-                      layout:
-                        columnSize: 0.6560773200769865
-                      props:
-                        value: tâche id
-                    - component: TextField
-                      name: tacheIdSousA
-                      layout:
-                        columnSize: 1.3439226799230135
-                      props:
-                        fullWidth: true
-                        defaultValue:
-                          $$jsExpression: dataGridTache.selection.id
-                - component: PageRow
-                  name: pageRow18
-                  props:
-                    justifyContent: start
-                  children:
-                    - component: Text
-                      name: text17
-                      props:
-                        value: Statut
-                    - component: Select
-                      name: completeSousA
-                      layout:
-                        horizontalAlign: end
-                      props:
-                        options:
-                          - "true"
-                          - "false"
-                        defaultValue:
-                          $$jsExpression: "false"
-              props:
-                hasResetButton: false
   queries:
     - name: listeTache
       mode: query
@@ -503,7 +345,11 @@ spec:
           $$jsExpression:
             "`${parameters.API_HOST}/tachesMemoire/taches/liste/${parameter\
             s.id}`"
-        headers: [{ name: Authorization, value: { $$env: API_KEY } }]
+        headers:
+          [
+            { name: Authorization, value: { $$env: API_KEY } },
+            { name: Utilisateur, value: { $$env: USER_ID } },
+          ]
         method: GET
         searchParams: []
       parameters:
@@ -522,6 +368,9 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
         method: GET
         searchParams: []
       parameters:
@@ -541,6 +390,9 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
         method: PATCH
         searchParams: []
       parameters:
@@ -560,6 +412,9 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
         method: PATCH
         searchParams: []
       parameters:
@@ -579,7 +434,10 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
-        method: POST
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
+        method: DELETE
         searchParams: []
       parameters:
         - name: API_HOST
@@ -598,6 +456,9 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
         method: DELETE
         searchParams: []
       parameters:
@@ -620,6 +481,9 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
         method: GET
       parameters:
         - name: id
@@ -637,24 +501,28 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
         body:
-          kind: urlEncoded
+          kind: raw
           content:
-            - name: titre
-              value:
-                $$jsExpression: parameters.titre
-            - name: description
-              value:
-                $$jsExpression: parameters.description
-            - name: date_debut
-              value:
-                $$jsExpression: parameters.date_debut
-            - name: date_echeance
-              value:
-                $$jsExpression: parameters.date_echeance
-            - name: complete
-              value:
-                $$jsExpression: parameters.complete
+            $$jsExpression: "`{\r
+
+              \  \"titre\" : \"${parameters.titre}\",\r
+
+              \  \"description\" : \"${parameters.description}\",\r
+
+              \  \"date_debut\" : \"${parameters.date_debut}\",\r
+
+              \  \"date_echeance\" : \"${parameters.date_echeance}\",\r
+
+              \  \"complete\" : ${parameters.complete}\r
+
+              \r
+
+              }`"
+          contentType: application/json
         method: PUT
         searchParams: []
       parameters:
@@ -689,18 +557,22 @@ spec:
           - name: Authorization
             value:
               $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
         body:
-          kind: urlEncoded
+          kind: raw
           content:
-            - name: titre
-              value:
-                $$jsExpression: parameters.titre
-            - name: tache_id
-              value:
-                $$jsExpression: parameters.description
-            - name: complete
-              value:
-                $$jsExpression: parameters.complete
+            $$jsExpression: "`{\r
+
+              \  \"tache_id\": ${parameters.tache_id},\r
+
+              \  \"titre\" : \"${parameters.titre}\",\r
+
+              \  \"complete\": ${parameters.complete}\r
+
+              }`"
+          contentType: application/json
         method: PUT
         searchParams: []
       parameters:

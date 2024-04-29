@@ -1,0 +1,228 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mui/mui-toolpad/v0.1.54/docs/schemas/v1/definitions.json#properties/Page
+
+apiVersion: v1
+kind: page
+spec:
+  title: ajoute
+  display: shell
+  authorization:
+    allowAll: true
+  content:
+    - component: Text
+      name: text4
+      props:
+        variant: h3
+        value: Ajouter tâche
+    - component: Form
+      name: form
+      children:
+        - component: PageRow
+          name: pageRow
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text
+              props:
+                value: titre
+            - component: TextField
+              name: titreTacheA
+        - component: PageRow
+          name: pageRow1
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text1
+              props:
+                value: description
+            - component: TextField
+              name: descriptionTacheA
+        - component: PageRow
+          name: pageRow2
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text2
+              props:
+                value: date début
+            - component: TextField
+              name: dateDebutA
+        - component: PageRow
+          name: pageRow3
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text3
+              props:
+                value: date d'échéance
+            - component: TextField
+              name: dateEcheanceA
+        - component: PageRow
+          name: pageRow6
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text8
+              props:
+                value: compléter
+            - component: Select
+              name: completeTacheA
+              props:
+                options:
+                  - "true"
+                  - "false"
+                defaultValue:
+                  $$jsExpression: "false"
+      props:
+        submitButtonText: Ajouter
+        onSubmit:
+          $$jsExpressionAction: ajouteTache.call()
+    - component: Text
+      name: text5
+      props:
+        variant: h3
+        value: Ajouter sous-tâches
+    - component: Form
+      name: form1
+      children:
+        - component: PageRow
+          name: pageRow4
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text6
+              props:
+                value: Tâche id
+            - component: TextField
+              name: tacheIdA
+        - component: PageRow
+          name: pageRow5
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text7
+              props:
+                value: titre
+            - component: TextField
+              name: titreSousA
+        - component: PageRow
+          name: pageRow7
+          props:
+            justifyContent: start
+          children:
+            - component: Text
+              name: text9
+              props:
+                value: compléter
+            - component: Select
+              name: completeSousA
+              props:
+                options:
+                  - "true"
+                  - "false"
+                defaultValue:
+                  $$jsExpression: "false"
+      props:
+        submitButtonText: Ajouter
+        onSubmit:
+          $$jsExpressionAction: ajouteSousTache.call()
+  queries:
+    - name: ajouteTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/taches/`"
+        headers:
+          [
+            { name: Authorization, value: { $$env: API_KEY } },
+            { name: Utilisateur, value: { $$env: USER_ID } },
+          ]
+        method: POST
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \  \"utilisateur_id\"  : ${parameters.utilisateur_id},\r
+
+              \  \"titre\" : \"${parameters.titre}\",\r
+
+              \  \"description\" : \"${parameters.description}\",\r
+
+              \  \"date_debut\" : \"${parameters.date_debut}\",\r
+
+              \  \"date_echeance\" : \"${parameters.date_echeance}\",\r
+
+              \  \"complete\" : ${parameters.complete}\r
+
+              }`"
+          contentType: application/json
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: utilisateur_id
+          value:
+            $$jsExpression: "1"
+        - name: titre
+          value:
+            $$jsExpression: titreTacheA.value
+        - name: description
+          value:
+            $$jsExpression: descriptionTacheA.value
+        - name: date_debut
+          value:
+            $$jsExpression: dateDebutA.value
+        - name: date_echeance
+          value:
+            $$jsExpression: dateEcheanceA.value
+        - name: complete
+          value:
+            $$jsExpression: completeTacheA.value
+    - name: ajouteSousTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/sousTaches/`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
+        body:
+          kind: raw
+          content:
+            $$jsExpression: "`{\r
+
+              \  \"tache_id\"  : ${parameters.tache_id},\r
+
+              \  \"titre\" : \"${parameters.titre}\",\r
+
+              \  \"complete\" : ${parameters.complete}\r
+
+              }`"
+          contentType: application/json
+        method: POST
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: tache_id
+          value:
+            $$jsExpression: tacheIdA.value
+        - name: titre
+          value:
+            $$jsExpression: titreSousA.value
+        - name: complete
+          value:
+            $$jsExpression: completeSousA.value
