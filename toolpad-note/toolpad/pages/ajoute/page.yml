@@ -132,6 +132,87 @@ spec:
         submitButtonText: Ajouter
         onSubmit:
           $$jsExpressionAction: ajouteSousTache.call()
+    - component: Text
+      name: text10
+      props:
+        value: Afficher tâche
+        variant: h3
+    - component: PageRow
+      name: pageRow8
+      children:
+        - component: PageColumn
+          name: pageColumn
+          children:
+            - component: PageRow
+              name: pageRow9
+              props:
+                justifyContent: start
+              children:
+                - component: TextField
+                  name: textField
+                - component: Button
+                  name: button
+                  props:
+                    content: Detail tâche
+                    onClick:
+                      $$jsExpressionAction: afficherTache.call()
+            - component: Text
+              name: text12
+              props:
+                value:
+                  $$jsExpression:
+                    "afficherTache.data ? `id : ${afficherTache.data.Tache.id}` :
+                    `Aucun`"
+            - component: Text
+              name: text13
+              props:
+                value:
+                  $$jsExpression: "afficherTache.data ? `utilisateur_id :
+                    ${afficherTache.data.Tache.utilisateur_id}` : `Aucun`"
+              layout:
+                columnSize: 1
+            - component: Text
+              name: text16
+              props:
+                value:
+                  $$jsExpression: "afficherTache.data ? `description :
+                    ${afficherTache.data.Tache.description}` : `Aucun`"
+            - component: Text
+              name: text14
+              props:
+                value:
+                  $$jsExpression: "afficherTache.data ? `date début :
+                    ${afficherTache.data.Tache.date_debut}` : `Aucun`"
+            - component: Text
+              name: text15
+              props:
+                value:
+                  $$jsExpression: "afficherTache.data ? `date d'échéance :
+                    ${afficherTache.data.Tache.date_echeance}` : `Aucun`"
+            - component: Text
+              name: text11
+              props:
+                value:
+                  $$jsExpression: "afficherTache.data ? `Complété :
+                    ${afficherTache.data.Tache.complete}` : `Aucun`"
+          layout:
+            columnSize: 1
+        - component: DataGrid
+          name: dataGrid
+          props:
+            rows:
+              $$jsExpression: "afficherTache.data ? afficherTache.data.SousTache : [0]"
+            columns:
+              - field: id
+                type: number
+              - field: tache_id
+                type: number
+              - field: titre
+                type: string
+              - field: complete
+                type: boolean
+      props:
+        justifyContent: start
   queries:
     - name: ajouteTache
       mode: mutation
@@ -164,6 +245,7 @@ spec:
 
               }`"
           contentType: application/json
+        searchParams: []
       parameters:
         - name: API_HOST
           value:
@@ -213,6 +295,7 @@ spec:
               }`"
           contentType: application/json
         method: POST
+        searchParams: []
       parameters:
         - name: API_HOST
           value:
@@ -226,3 +309,24 @@ spec:
         - name: complete
           value:
             $$jsExpression: completeSousA.value
+    - name: afficherTache
+      mode: mutation
+      query:
+        kind: rest
+        url:
+          $$jsExpression: "`${parameters.API_HOST}/tachesMemoire/taches/${parameters.id}`"
+        headers:
+          - name: Authorization
+            value:
+              $$env: API_KEY
+          - name: Utilisateur
+            value:
+              $$env: USER_ID
+        method: GET
+      parameters:
+        - name: API_HOST
+          value:
+            $$env: API_HOST
+        - name: id
+          value:
+            $$jsExpression: textField.value

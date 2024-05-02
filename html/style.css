@@ -60,9 +60,15 @@ body{
     background-color: cornflowerblue;
     color: white;
     border-radius: 5px;
-    border: white;
+    border: white solid 3px;
     font-size: 17px;
     padding: 6px 18px;
     margin-top: 1em ;
+    
 
 }
+
+#fbutton:hover{
+    border: transparent solid 3px;
+}
+
