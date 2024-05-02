@@ -7,16 +7,16 @@
     </head>
     <body>
         <div id="principale">
-            <form id="nvCle">
+            <div id="nvCle">
                 <h3 class="texte01"> Nouvelle Clé</h3>
                 <label for="courriel01" class="texte01">Courriel : </label>
                 <input type="text" class="input" id="courriel01" name="courriel01" placeholder="1234@abc.ca" required></input>
                 <label for="mdp01" class="texte01" required>Mot de passe : </label>
-                <input type="text" class="input"  id="mdp01" name="mdp01" placeholder="afafiaf*1#" required></input>
+                <input type="text" class="input" id="mdp01" name="mdp01" placeholder="afafiaf*1#" required></input>
                 <button onclick="nouvelleCle()" id="fbutton">Nouvelle Cle</button>
-                <b id="message"></b>
-                <b id="cle"></b>
-            </form>
+                <p id="message"></p>
+                <p id="cle"></p>
+            </div>
             <div id="nvUtilisateur">
                 <h3 class="texte01">Ajouter Utilisateur</h3>
                 <label for="nom" class="texte01">Nom : </label>
@@ -28,12 +28,9 @@
                 <label for="mdp02" class="texte01">Mot de passe : </label>
                 <input type="text" class="input" id="mdp02" name="mdp02" placeholder="afafiaf*1#" required></input>
                 <button onclick="nouveauUtilisateur()" id="fbutton">Inscrire</button>
-                <b id="message2"></b>
-                <b id="cle2"></b>
+                <p id="message2"></p>
+                <p id="clee"></p>
             </div>
-
-            
-
         </div>
     </body>
 </html>

@@ -1,0 +1,529 @@
+{
+	"info": {
+		"_postman_id": "72bfdec5-dd35-475e-99a3-4fcaf46975ff",
+		"name": "2241013 requetes",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32422463"
+	},
+	"item": [
+		{
+			"name": "Utilisateurs",
+			"item": [
+				{
+					"name": "NouvelleCle",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"uuid": "13eead7f-9e8a-470e-856d-65890bdb7300"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courriel\": \"courriel\",\r\n    \"mot_de_passe\": \"exemple\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/utilisateurs/cle",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"utilisateurs",
+								"cle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NouveauUtilisateur",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nom\" : \"Testing2\",\r\n    \"prenom\" : \"Test2\",\r\n    \"courriel\" : \"courriel22\",\r\n    \"mot_de_passe\" : \"test\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/utilisateurs/",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"utilisateurs",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Taches",
+			"item": [
+				{
+					"name": "DetailTache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"type": "text",
+								"uuid": "d2c84286-2c29-4e7c-8b7f-a8a5d984f6bc"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"type": "text",
+								"uuid": "3cf913bd-b96c-4657-8c69-a4eb93afdec5"
+							}
+						],
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/taches/3",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"taches",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Nouvelle tâche",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"uuid": "04c3637a-3484-480f-a7c3-c7b246e6aeb7"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"uuid": "975cb74a-88d6-40d9-b849-030f3f530f07"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"utilisateur_id\" : 1,\r\n    \"titre\" : \"Brosser le chat\",\r\n    \"description\" : \"il faut brosser Cooky\",\r\n    \"date_debut\" : \"2024-04-24\",\r\n    \"date_echeance\" : \"2024-04-28\",\r\n    \"complete\" : false\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/taches/",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"taches",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CompleteTache",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"type": "text",
+								"uuid": "d7e56149-f087-43ad-977f-e7efe5623508"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"type": "text",
+								"uuid": "8f2ce2c2-4548-4991-9733-245df4b31183"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/taches/3",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"taches",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SupprimerTache",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"uuid": "946e7a79-8881-4be7-8db2-8d1e8484f8e8"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"uuid": "09cfef9f-4bed-4dee-a3e4-321c3fbb52b6"
+							}
+						],
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/taches/7",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"taches",
+								"7"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListeTache",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"uuid": "5f3d1daf-f583-4989-bb7c-0171811f3e40"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"uuid": "1416bb4b-8bda-48ed-8c06-5e912ac62603"
+							}
+						],
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/taches/liste/1",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"taches",
+								"liste",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ListeTacheComplete",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"type": "text",
+								"uuid": "9441a242-34c2-47ff-ac71-6b114c5dd1e4"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"type": "text",
+								"uuid": "dc38ed21-3d6b-40b9-84fe-38d1692e707d"
+							}
+						],
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/taches/listeComplete/1",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"taches",
+								"listeComplete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifierTache",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"type": "text",
+								"uuid": "973f9746-0a2c-4111-a6e5-f70bedb029d2"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"type": "text",
+								"uuid": "5993e029-0450-4bcf-9040-e54d13c9db85"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titre\" : \"e\",\r\n    \"description\" : \"frotter fort\",\r\n    \"date_debut\" : \"2024-04-25\",\r\n    \"date_echeance\" : \"2024-04-30\",\r\n    \"complete\" : false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/taches/4",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"taches",
+								"4"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sous-taches",
+			"item": [
+				{
+					"name": "CompleteSousTache",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"uuid": "42bef1fa-c8e6-4c44-bc2f-5ca6f762f3ec"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"uuid": "01ce1e7f-47ee-4b14-8295-f4ec55ccb0c7"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/sousTaches/10",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"sousTaches",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NouvelleSousTache",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"uuid": "69108af8-5bd2-4f6a-b675-1bff6a77f079"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"uuid": "32278db1-51bf-47e3-a916-44ff2ea22d4c"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tache_id\" : 8,\r\n    \"titre\" : \"gros minou\",\r\n    \"complete\" : false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/sousTaches/",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"sousTaches",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SupprimerSousTache",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"uuid": "4b4dc102-b677-4e31-98be-f49180a1406e"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"uuid": "4ba4fd89-2cff-4b3b-9cff-19f568f170bf"
+							}
+						],
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/sousTaches/1",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"sousTaches",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ModifierSousTache",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "cle_api 9b1a531a-865f-412d-959c-0f18105a63b5",
+								"type": "text",
+								"uuid": "05ca0ac9-931e-4944-a735-eac98ce25f71"
+							},
+							{
+								"key": "Utilisateur",
+								"value": "utilisateur_id 1",
+								"type": "text",
+								"uuid": "62c3c59d-702b-4119-9fff-f3c9b4792b7e"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tache_id\" : 3,\r\n    \"titre\" : \"cirer plus fort\",\r\n    \"complete\" : false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://two241013-patate01.onrender.com/tachesMemoire/sousTaches/30",
+							"protocol": "https",
+							"host": [
+								"two241013-patate01",
+								"onrender",
+								"com"
+							],
+							"path": [
+								"tachesMemoire",
+								"sousTaches",
+								"30"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
