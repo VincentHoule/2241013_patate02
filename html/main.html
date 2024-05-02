@@ -7,25 +7,25 @@
     </head>
     <body>
         <div id="principale">
-            <div id="nvCle">
+            <form id="nvCle">
                 <h3 class="texte01"> Nouvelle Clé</h3>
                 <label class="texte01">Courriel : </label>
-                <input type="text" class="input" id="courriel01" name="courriel01" placeholder="1234@abc.ca"></input>
-                <label class="texte01">Mot de passe : </label>
-                <input type="text" class="input"  id="mdp01" name="mdp01" placeholder="afafiaf*1#"></input>
+                <input type="text" class="input" id="courriel01" name="courriel01" placeholder="1234@abc.ca" required></input>
+                <label class="texte01" required>Mot de passe : </label>
+                <input type="text" class="input"  id="mdp01" name="mdp01" placeholder="afafiaf*1#" required></input>
                 <button onclick="nouvelleCle()" id="fbutton">Nouvelle Cle</button>
                 <b id="cle"></b>
-            </div>
+            </form>
             <div id="nvUtilisateur">
                 <h3 class="texte01">Ajouter Utilisateur</h3>
                 <label class="texte01">Nom : </label>
-                <input type="text" class="input"  id="nom" name="nom" placeholder="Laplante"></input>  
+                <input type="text" class="input"  id="nom" name="nom" placeholder="Laplante" required></input>  
                 <label class="texte01">Prenom : </label>
-                <input type="text" class="input"  id="prenom" name="prenom" placeholder="Robert"></input>
+                <input type="text" class="input"  id="prenom" name="prenom" placeholder="Robert" required></input>
                 <label class="texte01">Courriel : </label>
-                <input type="text" class="input"  id="courriel02" name="courriel02" placeholder="1234@abc.ca"></input>
+                <input type="text" class="input"  id="courriel02" name="courriel02" placeholder="1234@abc.ca" required></input>
                 <label class="texte01">Mot de passe : </label>
-                <input type="text" class="input"  id="mdp02" name="mdp02" placeholder="afafiaf*1#"></input>
+                <input type="text" class="input"  id="mdp02" name="mdp02" placeholder="afafiaf*1#" required></input>
                 <button onclick="nouveauUtilisateur()" id="fbutton">Inscrire</button>
                 <b id="cle2"></b>
             </div>
