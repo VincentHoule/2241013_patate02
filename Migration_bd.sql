@@ -6,7 +6,7 @@ create table utilisateurs (
 	id serial primary key,
 	nom varchar(30),
 	prenom varchar(30),
-	courriel varchar(255),
+	courriel varchar(255) UNIQUE,
 	cle_api varchar(255),
 	password varchar(100)
 );
@@ -29,6 +29,6 @@ create table sous_taches (
 	tache_id int,
 	titre varchar(100),
 	complete bool,
-	foreign key (tache_id) references taches(id)
+	foreign key (tache_id) references taches(id) ON DELETE CASCADE
 );
 
